@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,14 @@ public class InventoryManager : MonoBehaviour
     public Item[] items = new Item[3];
     public Image[] imageSlots;
     public GameObject playerHands;
+
+    private GameObject Body;
+    private Animator animator;
+    private void Start()
+    {
+        Body = GameObject.Find("PlayerBody");
+        animator = Body.GetComponent<Animator>();
+    }
     private void Update()
     {
         if(Input.mouseScrollDelta.y > 0)
@@ -18,10 +27,31 @@ public class InventoryManager : MonoBehaviour
         {
             RotateInventoryForwards();
         }
-
-        if(Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            UseItem();
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             DropItem();
+        }
+    }
+    public void UseItem()
+    {
+        if (items[0] != null)
+        {
+            switch(items[0])
+            {
+                case MeleeWeapon:
+                    animator.SetTrigger("isAttacking");
+                    break;
+                case RangedWeapon:
+                    break;
+                case Consumable:
+                    break;
+                case Key:
+                    break;
+            }
         }
     }
     public void AddItem(Item item, GameObject reference)
@@ -96,20 +126,21 @@ public class InventoryManager : MonoBehaviour
         }
         if (items[0] != null)
         {
-            GameObject Object = Instantiate(items[0].ObjectPrefab);
+            GameObject Object = Instantiate(items[0].HeldPrefab);
             Object.transform.rotation = playerHands.transform.rotation;
             Object.transform.position = playerHands.transform.position;
             Object.transform.SetParent(playerHands.transform, true);
-            Object.GetComponent<Collider>().isTrigger = true;
-            Destroy(Object.GetComponent<Rigidbody>());
-            Destroy(Object.GetComponent<ItemHolder>());
+            GameObject Item = Object.transform.GetChild(0).gameObject;
+            Item.GetComponent<Collider>().isTrigger = true;
+            Destroy(Item.GetComponent<Rigidbody>());
+            Destroy(Item.GetComponent<ItemHolder>());
         }
     }
     public void DropItem()
     {
         if (items[0] != null)
         {
-            GameObject Object = Instantiate(items[0].ObjectPrefab);
+            GameObject Object = Instantiate(items[0].WorldPrefab);
             Object.transform.position = playerHands.transform.position;
             items[0] = null;
             UpdateInventory();

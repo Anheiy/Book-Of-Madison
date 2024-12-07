@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 300897e104022554c9f764e2437c27a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 2863b8409c03dba4f8d4ef78788e04f0, type: 3}
   m_Name: Plank
   m_EditorClassIdentifier: 
   itemName: Plank
-  itemDescription: Wooden plank, this should work
-  itemSprite: {fileID: 21300000, guid: 9b86ccac62828974d8c765e25eccbbec, type: 3}
-  ObjectPrefab: {fileID: 8443282150199294150, guid: 5178e60055e42184d9ba6cd51c2848a7, type: 3}
-  isWeapon: 1
-  WeaponDamage: 10
-  Weight: 1
+  itemDescription: a dull weapon, seems to have fallen off the roof
+  itemSprite: {fileID: -1069183471, guid: d5227c5479e6bcf46b4e2f26e70676c6, type: 3}
+  HeldPrefab: {fileID: 2314632314012824509, guid: afbc11de76f97374d81c009278d5628b, type: 3}
+  WorldPrefab: {fileID: 3390234122546083370, guid: f27ff20322b5b474fa20732dc1a3aff7, type: 3}
+  DamageOnHit: 1
+  ReloadSpeed: 0.3
