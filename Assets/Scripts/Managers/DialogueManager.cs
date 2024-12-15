@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
     private int informationIndex = 0;
     private int dialogueIndex = 0;
     private Coroutine currentCoroutine;
+    public bool isDialogLocked = false;
     public void CollectDialogue(DialoguePacket packet)
     {
         if (this.packet == null)
@@ -36,42 +37,49 @@ public class DialogueManager : MonoBehaviour
     }
     private void SwapText()
     {
-        if(currentCoroutine != null) 
-            StopCoroutine(currentCoroutine);
-        if (packet != null)
+        if (isDialogLocked == false)
         {
-            if (packet.information.Count > informationIndex)
+            if (currentCoroutine != null)
+                StopCoroutine(currentCoroutine);
+            if (packet != null)
             {
-
-                //if the informationIndex exists
-                if (!(packet.information[informationIndex].dialogue.Length - 1 < dialogueIndex))
+                if (packet.information.Count > informationIndex)
                 {
 
-                    LoadDialogue(packet.information[informationIndex].dialogue[dialogueIndex]);
-                    dialogueIndex++;
-
-                }
-                else
-                {
-                    informationIndex++;
-                    dialogueIndex = 0;
-                    if (packet.information.Count > informationIndex)
+                    //if the informationIndex exists
+                    if (!(packet.information[informationIndex].dialogue.Length - 1 < dialogueIndex))
                     {
+
                         LoadDialogue(packet.information[informationIndex].dialogue[dialogueIndex]);
                         dialogueIndex++;
+
                     }
                     else
                     {
-                        //if the informationIndex dont exist reset it
-                        textPanel.DOFade(0, 0.3f);
-                        packet = null;
+                        informationIndex++;
                         dialogueIndex = 0;
-                        informationIndex = 0;
+                        if (packet.information.Count > informationIndex)
+                        {
+                            LoadDialogue(packet.information[informationIndex].dialogue[dialogueIndex]);
+                            dialogueIndex++;
+                        }
+                        else
+                        {
+                            //if the informationIndex dont exist reset it
+                            CloseDialog();
+                        }
                     }
+
                 }
-                
             }
         }
+    }
+    public void CloseDialog()
+    {
+        textPanel.DOFade(0, 0.3f);
+        packet = null;
+        dialogueIndex = 0;
+        informationIndex = 0;
     }
 
     private void LoadDialogue(string dialogue)

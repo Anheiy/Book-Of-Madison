@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class InteractHolder : MonoBehaviour
+public class InteractManager : MonoBehaviour
 {
     public GameObject InteractObject;
     public GameObject Player;
@@ -18,6 +18,7 @@ public class InteractHolder : MonoBehaviour
     public GameObject OptionsLocation;
     //also checks if it is in a line infront of player
     public float InteractRange = 2;
+    public bool isInteractLocked = false;
     private Tween fadeTween;
     //
     private GameStateManager GameState;
@@ -28,30 +29,36 @@ public class InteractHolder : MonoBehaviour
 
     private void Update()
     {
-        if (InteractObject != null)
+        if (!isInteractLocked)
         {
-            CheckRange();
-            CheckInfront();
+            if (InteractObject != null)
+            {
+                CheckRange();
+                CheckInfront();
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+                Interact();
+            else if (Input.GetKeyDown(KeyCode.Q))
+                Deselect();
         }
-        if (Input.GetKeyDown(KeyCode.E))
-            Interact();
-        else if (Input.GetKeyDown(KeyCode.Q))
-            Deselect();
     }
     public void ReplaceInteractObject(GameObject obj)
     {
-        if (InteractObject == obj)
-            return;
-
-        if ((InteractObject == null && range.ObjectsInfront.Contains(obj))
-    || (InteractObject != null
-        && Vector3.Distance(Player.transform.position, InteractObject.transform.position) > Vector3.Distance(Player.transform.position, obj.transform.position)
-        && range.ObjectsInfront.Contains(obj)
-        && Vector3.Distance(Player.transform.position, obj.transform.position) <= InteractRange))
+        if(!isInteractLocked)
         {
-            InteractObject = obj;
-            EnableUI();
-            Debug.Log("Replaced InteractObject");
+            if (InteractObject == obj)
+                return;
+
+            if ((InteractObject == null && range.ObjectsInfront.Contains(obj))
+        || (InteractObject != null
+            && Vector3.Distance(Player.transform.position, InteractObject.transform.position) > Vector3.Distance(Player.transform.position, obj.transform.position)
+            && range.ObjectsInfront.Contains(obj)
+            && Vector3.Distance(Player.transform.position, obj.transform.position) <= InteractRange))
+            {
+                InteractObject = obj;
+                EnableUI();
+                Debug.Log("Replaced InteractObject");
+            }
         }
     }
 
@@ -89,11 +96,11 @@ public class InteractHolder : MonoBehaviour
         {
             if ((currentTextIndex != 0) && InteractObject.GetComponent<Interactable>().ignoreIntial)
             {
-                GameState.Pause();
+                GameState.PauseState();
             }
             else if(!InteractObject.GetComponent<Interactable>().ignoreIntial)
             {
-                GameState.Unpause();
+                GameState.PlayState();
             }
             InteractText.text = text[currentTextIndex].PromptText;
             //Add Option Prompts
@@ -142,8 +149,6 @@ public class InteractHolder : MonoBehaviour
             }
             
             currentTextIndex = 0;
-            Movement.lockMovement = false;
-            Rotation.LockRotation = false;
             
         });
         InteractObject = null;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,14 +9,20 @@ public class InventoryManager : MonoBehaviour
 {
     public Item[] items = new Item[3];
     public Image[] imageSlots;
-    public GameObject playerHands;
+    public GameObject meleeWeaponLocation;
+    public GameObject rangedWeaponLocation;
+    public bool isScrollLocked = false;
 
     private GameObject Body;
     private Animator animator;
+    private GameStateManager gameStateManager;
+    
+    
     private void Start()
     {
         Body = GameObject.Find("PlayerBody");
         animator = Body.GetComponent<Animator>();
+        gameStateManager = GetComponent<GameStateManager>();   
     }
     private void Update()
     {
@@ -31,9 +38,30 @@ public class InventoryManager : MonoBehaviour
         {
             UseItem();
         }
+
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            DropItem();
+            ScopeItem();
+        }
+        else if( Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            UnscopeItem();
+        }
+    }
+    public void ScopeItem()
+    {
+        Debug.Log("scoping");
+        if (items[0] is RangedWeapon)
+        {
+            animator.SetBool("isScoping",true);
+        }
+    }
+    public void UnscopeItem()
+    {
+        Debug.Log("scoping");
+        if (items[0] is RangedWeapon)
+        {
+            animator.SetBool("isScoping", false);
         }
     }
     public void UseItem()
@@ -46,6 +74,9 @@ public class InventoryManager : MonoBehaviour
                     animator.SetTrigger("isAttacking");
                     break;
                 case RangedWeapon:
+                    Debug.Log("Firing");
+                    if(animator.GetBool("isFiring") == false)
+                    animator.SetBool("isFiring", true);
                     break;
                 case Consumable:
                     break;
@@ -100,40 +131,91 @@ public class InventoryManager : MonoBehaviour
     }
     public void RotateInventoryForwards()
     {
-        Item lastItem = items[0];
-        for (int i = 0; i < imageSlots.Length - 1; i++)
+        if (gameStateManager.GetState() == "play")
         {
-            items[i] = items[i + 1];
+            Item lastItem = items[0];
+            for (int i = 0; i < imageSlots.Length - 1; i++)
+            {
+                items[i] = items[i + 1];
+            }
+            items[items.Length - 1] = lastItem;
+            UpdateInventory();
         }
-        items[items.Length - 1] = lastItem;
-        UpdateInventory();
     }
     public void RotateInventoryBackwards()
     {
-        Item lastItem = items[items.Length - 1];
-        for (int i = imageSlots.Length - 1; i > 0; i--)
+        if (gameStateManager.GetState() == "play")
         {
+            Item lastItem = items[items.Length - 1];
+            for (int i = imageSlots.Length - 1; i > 0; i--)
+            {
                 items[i] = items[i - 1];
+            }
+            items[0] = lastItem;
+            UpdateInventory();
         }
-        items[0] = lastItem;
-        UpdateInventory();
     }
     public void ShowObject()
-    {
-        for(int i = 0; i < playerHands.transform.childCount; i++)
+    { 
+        for (int i = 0; i < rangedWeaponLocation.transform.childCount; i++)
+            {
+                Destroy(rangedWeaponLocation.transform.GetChild(0).gameObject);
+            }
+        for (int i = 0; i < meleeWeaponLocation.transform.childCount; i++)
+            {
+                Destroy(meleeWeaponLocation.transform.GetChild(0).gameObject);
+            }
+        if (items[0] is MeleeWeapon)
         {
-            Destroy(playerHands.transform.GetChild(0).gameObject);
+
+            if (items[0] != null)
+            {
+                // Instantiate the object at the rangedWeaponLocation's world position and rotation
+                GameObject Object = Instantiate(
+                    items[0].HeldPrefab,
+                    meleeWeaponLocation.transform.position,
+                    meleeWeaponLocation.transform.rotation
+                );
+
+                // Set it as a child while preserving world position
+                Object.transform.SetParent(meleeWeaponLocation.transform, true);
+
+                // Reset the local transform
+                Object.transform.localPosition = Vector3.zero;
+                Object.transform.localRotation = Quaternion.identity;
+
+                // Adjustments to the instantiated object
+                Object.GetComponent<Collider>().isTrigger = true;
+                Destroy(Object.GetComponent<Rigidbody>());
+                Destroy(Object.GetComponent<ItemHolder>());
+            }
         }
-        if (items[0] != null)
+        else if (items[0] is RangedWeapon)
         {
-            GameObject Object = Instantiate(items[0].HeldPrefab);
-            Object.transform.rotation = playerHands.transform.rotation;
-            Object.transform.position = playerHands.transform.position;
-            Object.transform.SetParent(playerHands.transform, true);
-            GameObject Item = Object.transform.GetChild(0).gameObject;
-            Item.GetComponent<Collider>().isTrigger = true;
-            Destroy(Item.GetComponent<Rigidbody>());
-            Destroy(Item.GetComponent<ItemHolder>());
+
+            if (items[0] != null)
+            {
+                // Instantiate the object at the rangedWeaponLocation's world position and rotation
+                GameObject Object = Instantiate(
+                    items[0].HeldPrefab,
+                    rangedWeaponLocation.transform.position,
+                    rangedWeaponLocation.transform.rotation
+                );
+
+                // Set it as a child while preserving world position
+                Object.transform.SetParent(rangedWeaponLocation.transform, true);
+
+                // Reset the local transform
+                Object.transform.localPosition = Vector3.zero;
+                Object.transform.localRotation = Quaternion.identity;
+                Object.transform.localScale = new Vector3(3,3,3);
+
+                // Adjustments to the instantiated object
+                Object.GetComponent<Collider>().isTrigger = true;
+                Destroy(Object.GetComponent<Rigidbody>());
+                Destroy(Object.GetComponent<ItemHolder>());
+            }
+
         }
     }
     public void DropItem()
@@ -141,7 +223,7 @@ public class InventoryManager : MonoBehaviour
         if (items[0] != null)
         {
             GameObject Object = Instantiate(items[0].WorldPrefab);
-            Object.transform.position = playerHands.transform.position;
+            Object.transform.position = meleeWeaponLocation.transform.position;
             items[0] = null;
             UpdateInventory();
         }

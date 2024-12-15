@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public abstract class Interactable : MonoBehaviour
 {
     [HideInInspector]public GameObject Player;
-    [HideInInspector] public InteractHolder InteractHolder;
+    [HideInInspector] public InteractManager InteractManager;
     [Serializable]
     public struct OptionPrompt
     {
@@ -30,7 +30,7 @@ public abstract class Interactable : MonoBehaviour
     private void Awake()
     {
         Player = GameObject.Find("Player");
-        InteractHolder = GameObject.Find("GameManager").GetComponent<InteractHolder>();
+        InteractManager = GameObject.Find("GameManager").GetComponent<InteractManager>();
     }
 
     private void Update()
@@ -38,9 +38,9 @@ public abstract class Interactable : MonoBehaviour
         if (Player != null)
         {
             float distance = Vector3.Distance(Player.transform.position, transform.position);
-            if (distance < InteractHolder.InteractRange)
+            if (distance < InteractManager.InteractRange)
             {
-                InteractHolder.ReplaceInteractObject(gameObject);
+                InteractManager.ReplaceInteractObject(gameObject);
             }
         }
     }

@@ -7,7 +7,7 @@ public class Rotation : MonoBehaviour
     public GameObject rotationObject;
     public Camera mainCamera;          // Reference to the camera
     public float rotationSpeed = 5f;   // Adjust the rotation speed as needed
-    public static bool LockRotation = false;
+    public bool LockRotation = false;
 
     void Update()
     {
