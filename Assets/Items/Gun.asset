@@ -15,8 +15,7 @@ MonoBehaviour:
   itemName: Placeholder Name
   itemDescription: Placeholder Text
   itemSprite: {fileID: 21300000, guid: 80bb41fa1b9704d4dba5dd8addde7608, type: 3}
-  HeldPrefab: {fileID: 4832311884454523210, guid: 42dc1420265004148bfc3ffa6768a339, type: 3}
-  WorldPrefab: {fileID: 4832311884454523210, guid: 42dc1420265004148bfc3ffa6768a339, type: 3}
+  Prefab: {fileID: 4832311884454523210, guid: 42dc1420265004148bfc3ffa6768a339, type: 3}
   DamageOnHit: 1
   ShotSpeed: 0.3
   projectile: {fileID: 4832311884454523210, guid: 42dc1420265004148bfc3ffa6768a339, type: 3}

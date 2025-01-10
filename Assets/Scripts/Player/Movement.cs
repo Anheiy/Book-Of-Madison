@@ -39,12 +39,10 @@ public class Movement : MonoBehaviour
         if (horizontalInput != 0 || verticalInput != 0)
         {
             animator.SetBool("isMoving", true);
-            Debug.Log("True");
         }
         else
         {
             animator.SetBool("isMoving", false);
-            Debug.Log("False");
         }
     }
 

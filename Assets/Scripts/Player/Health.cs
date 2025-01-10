@@ -8,6 +8,7 @@ public class Health : Damageable
     void Awake()
     {
         ondamaged += ReduceHealthStats;
+        onhealed += IncreaseHealthStats;
     }
 
     public void ReduceHealthStats()
@@ -15,6 +16,13 @@ public class Health : Damageable
         for (int i = health; i < maxHealth; i++)
         {
             healthList[i].SetActive(false);
+        }
+    }
+    public void IncreaseHealthStats()
+    {
+        for (int i = health - 1; i < maxHealth; i++)
+        {
+            healthList[i].SetActive(true);
         }
     }
 }

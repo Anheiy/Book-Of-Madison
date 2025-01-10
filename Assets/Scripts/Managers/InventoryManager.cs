@@ -79,6 +79,7 @@ public class InventoryManager : MonoBehaviour
                     animator.SetBool("isFiring", true);
                     break;
                 case Consumable:
+                    animator.SetTrigger("isEating");
                     break;
                 case Key:
                     break;
@@ -172,7 +173,7 @@ public class InventoryManager : MonoBehaviour
             {
                 // Instantiate the object at the rangedWeaponLocation's world position and rotation
                 GameObject Object = Instantiate(
-                    items[0].HeldPrefab,
+                    items[0].Prefab,
                     meleeWeaponLocation.transform.position,
                     meleeWeaponLocation.transform.rotation
                 );
@@ -197,7 +198,7 @@ public class InventoryManager : MonoBehaviour
             {
                 // Instantiate the object at the rangedWeaponLocation's world position and rotation
                 GameObject Object = Instantiate(
-                    items[0].HeldPrefab,
+                    items[0].Prefab,
                     rangedWeaponLocation.transform.position,
                     rangedWeaponLocation.transform.rotation
                 );
@@ -217,16 +218,51 @@ public class InventoryManager : MonoBehaviour
             }
 
         }
+        else if (items[0] is Consumable)
+        {
+
+            if (items[0] != null)
+            {
+                // Instantiate the object at the rangedWeaponLocation's world position and rotation
+                GameObject Object = Instantiate(
+                    items[0].Prefab,
+                    rangedWeaponLocation.transform.position,
+                    rangedWeaponLocation.transform.rotation
+                );
+
+                // Set it as a child while preserving world position
+                Object.transform.SetParent(rangedWeaponLocation.transform, true);
+
+                // Reset the local transform
+                Object.transform.localPosition = Vector3.zero;
+                Object.transform.localRotation = Quaternion.identity;
+
+                // Adjustments to the instantiated object
+                Object.GetComponent<Collider>().isTrigger = true;
+                Destroy(Object.GetComponent<Rigidbody>());
+                Destroy(Object.GetComponent<ItemHolder>());
+            }
+
+        }
     }
     public void DropItem()
     {
         if (items[0] != null)
         {
-            GameObject Object = Instantiate(items[0].WorldPrefab);
+            GameObject Object = Instantiate(items[0].Prefab);
             Object.transform.position = meleeWeaponLocation.transform.position;
             items[0] = null;
             UpdateInventory();
         }
     }
 
+    public Item GetCurrentItem()
+    {
+        return items[0];
+    }
+    public void DeleteCurrentItem()
+    {
+        items[0] = null;
+        UpdateInventory();
+    }
 }

@@ -41,7 +41,6 @@ public class GameStateManager : MonoBehaviour
         {
             movement.lockMovement = true;
             rotation.LockRotation = true;
-            Debug.Log("pause state");
         }
         else if (currentstate == State.play)
         {
@@ -49,14 +48,12 @@ public class GameStateManager : MonoBehaviour
             rotation.LockRotation = false;
             interactManager.isInteractLocked = false;
             dialogueManager.isDialogLocked = false;
-            Debug.Log("play state");
         }
         else if (currentstate == State.scope)
         {
             movement.lockMovement = true;
             interactManager.isInteractLocked = true;
             dialogueManager.isDialogLocked = true;
-            Debug.Log("scope state");
         }
     }
     public string GetState()

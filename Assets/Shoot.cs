@@ -7,6 +7,7 @@ public class Shoot : MonoBehaviour
 {
     Animator animator;
     GameStateManager stateManager;
+    public Camera mainCamera;
     private void Start()
     {
         animator = GetComponent<Animator>();   
@@ -29,7 +30,23 @@ public class Shoot : MonoBehaviour
     }
     public void StartFire()
     {
+        Vector3 mousePos = Input.mousePosition;
+        Vector3 viewportPoint = new Vector3(mousePos.x / Screen.width, mousePos.y / Screen.height, 0);
+        Ray ray = mainCamera.ViewportPointToRay(viewportPoint);
 
+        RaycastHit hit;
+
+        // Perform the raycast
+        if (Physics.Raycast(ray, out hit))
+        {
+            // Get the point where the ray hit
+            Vector3 hitPoint = hit.point;
+            if (hit.transform.gameObject.GetComponent<Damageable>() != null)
+            {
+                hit.transform.gameObject.GetComponent<Damageable>().ReduceHealth(2);
+                Debug.Log("shot fired at: " + hit.transform.gameObject.name);
+            }
+        }
     }
     public void StartScope()
     {

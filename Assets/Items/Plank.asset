@@ -15,7 +15,6 @@ MonoBehaviour:
   itemName: Plank
   itemDescription: a dull weapon, seems to have fallen off the roof
   itemSprite: {fileID: -1069183471, guid: d5227c5479e6bcf46b4e2f26e70676c6, type: 3}
-  HeldPrefab: {fileID: 3390234122546083370, guid: f27ff20322b5b474fa20732dc1a3aff7, type: 3}
-  WorldPrefab: {fileID: 3390234122546083370, guid: f27ff20322b5b474fa20732dc1a3aff7, type: 3}
+  Prefab: {fileID: 3390234122546083370, guid: f27ff20322b5b474fa20732dc1a3aff7, type: 3}
   DamageOnHit: 1
   SwingSpeed: 0.3
