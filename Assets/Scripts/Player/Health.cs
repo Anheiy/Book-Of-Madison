@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Health : Damageable
 {
@@ -9,6 +10,12 @@ public class Health : Damageable
     {
         ondamaged += ReduceHealthStats;
         onhealed += IncreaseHealthStats;
+        InvokeRepeating("Cycle", 0, 5);
+    }
+    private void OnDestroy()
+    {
+        ondamaged -= ReduceHealthStats;
+        onhealed -= IncreaseHealthStats;
     }
 
     public void ReduceHealthStats()
@@ -23,6 +30,21 @@ public class Health : Damageable
         for (int i = health - 1; i < maxHealth; i++)
         {
             healthList[i].SetActive(true);
+        }
+    }
+
+    public void Cycle()
+    {
+        StartCoroutine(heartPump());
+    }
+    IEnumerator heartPump()
+    {
+        for (int i = 0; i < healthList.Count; i++)
+        {
+            int index = i;
+            
+            healthList[index].transform.DOScale(1.25f, 0.5f).OnComplete(() => healthList[index].transform.DOScale(1, 0.5f));
+            yield return new WaitForSeconds(1.5f);
         }
     }
 }

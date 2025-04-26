@@ -94,6 +94,7 @@ public class InteractManager : MonoBehaviour
         List<Interactable.OptionPrompt> text = InteractObject.GetComponent<Interactable>().ScrollText();
         if (text.Count > currentTextIndex)
         {
+            
             if ((currentTextIndex != 0) && InteractObject.GetComponent<Interactable>().ignoreIntial)
             {
                 GameState.PauseState();
@@ -113,22 +114,20 @@ public class InteractManager : MonoBehaviour
                 GameObject button = Instantiate(OptionPrompt, OptionsLocation.transform);
                 button.GetComponent<TextMeshProUGUI>().text = "<sprite=" + (i + 2) +"> " +text[currentTextIndex].buttons[i].text;
             }
-            if (currentTextIndex - 1 != -1 && text[currentTextIndex].buttons[0].selectionEvent != null)
+            
+
+        }
+        if(text.Count <= currentTextIndex)
+        {
+            
+            InteractObject.GetComponent<Interactable>().Interact();
+            Deselect();
+        }            
+        if (currentTextIndex - 1 != -1 && text[currentTextIndex - 1].buttons[0].selectionEvent != null)
             {
                 text[currentTextIndex - 1].buttons[0].selectionEvent.Invoke();
             }
-        }
-        
         currentTextIndex++;
-        if(text.Count < currentTextIndex)
-        {
-            Debug.Log("Text Count: "+ text.Count + "currentTextIndex: " + currentTextIndex);
-            InteractObject.GetComponent<Interactable>().Interact();
-            Deselect();
-            
-            
-        }
-        
     }
     public void Deselect()
     {

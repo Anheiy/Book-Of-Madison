@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
-    public Item[] items = new Item[3];
+    public static Item[] items = new Item[3];
     public Image[] imageSlots;
     public GameObject meleeWeaponLocation;
     public GameObject rangedWeaponLocation;
@@ -16,6 +17,8 @@ public class InventoryManager : MonoBehaviour
     private GameObject Body;
     private Animator animator;
     private GameStateManager gameStateManager;
+
+    public TextMeshProUGUI item_name;
     
     
     private void Start()
@@ -38,7 +41,10 @@ public class InventoryManager : MonoBehaviour
         {
             UseItem();
         }
-
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            DropItem();
+        }
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             ScopeItem();
@@ -121,13 +127,19 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < items.Length; i++)
         {
-            if(items[i] != null)
-            imageSlots[i].sprite = items[i].itemSprite;
+            if (items[i] != null)
+            {
+                imageSlots[i].sprite = items[i].itemSprite;
+            }
             else
             {
                 imageSlots[i].sprite = null;
             }
         }
+        if(items[0] != null)
+            item_name.text = items[0].itemName;
+        else
+            item_name.text = "";
         ShowObject();
     }
     public void RotateInventoryForwards()

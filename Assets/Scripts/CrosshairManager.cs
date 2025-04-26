@@ -10,7 +10,10 @@ public class CrosshairManager : MonoBehaviour
     public Material normalMat;
     public Camera mainCamera;
     public GameStateManager stateManager;
-
+    private void Start()
+    {
+        Cursor.visible = false;
+    }
     private void Update()
     {
         Vector3 mousePos = Input.mousePosition;
@@ -34,7 +37,6 @@ public class CrosshairManager : MonoBehaviour
             Vector3 hitPoint = hit.point;
             scopeCrosshairPrefab.transform.position = hitPoint;
             normalCrosshairPrefab.transform.position = hitPoint;
-            Cursor.visible = false;
         }
 
         scopeCrosshairPrefab.SetActive(stateManager.GetState() == "scope");

@@ -26,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3036905957750032828}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.47549355, y: 0.51926714, z: 0.47200814, w: -0.530543}
-  m_LocalPosition: {x: -0.02, y: 0.0453, z: 0.0225}
+  m_LocalRotation: {x: 0.4942471, y: 0.5014509, z: -0.5056875, w: -0.49854493}
+  m_LocalPosition: {x: -0.105, y: 0.0453, z: 0.013}
   m_LocalScale: {x: 0.24756373, y: 0.08412036, z: 0.09564329}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3837552508133043387}
-  m_LocalEulerAnglesHint: {x: 0.822, y: 270.489, z: -84.132}
+  m_LocalEulerAnglesHint: {x: 0.822, y: 270.489, z: 90}
 --- !u!33 &536109689020720400
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 2081211855765802036}
   - component: {fileID: 3459963115600278821}
   m_Layer: 0
-  m_Name: World Gun
+  m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -134,7 +134,7 @@ MonoBehaviour:
   Player: {fileID: 0}
   InteractManager: {fileID: 0}
   ignoreIntial: 0
-  item: {fileID: 0}
+  item: {fileID: 11400000, guid: db94132278cf7204796ebb77ff42200e, type: 2}
   prompt: []
 --- !u!65 &2081211855765802036
 BoxCollider:
@@ -155,8 +155,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.40709734, y: 0.10833216, z: 0.19885802}
-  m_Center: {x: -0.0019562244, y: 0.27859902, z: 0.042375922}
+  m_Size: {x: 0.17710717, y: 0.24144027, z: 0.12720245}
+  m_Center: {x: -0.07154282, y: 0.04972081, z: 0.0065481216}
 --- !u!54 &3459963115600278821
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -211,7 +211,7 @@ Transform:
   m_GameObject: {fileID: 8312728176203011173}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.99983186, w: 0.018340185}
-  m_LocalPosition: {x: 0.04, y: -0.035, z: 0.0106}
+  m_LocalPosition: {x: -0.044999994, y: -0.035, z: 0.0106}
   m_LocalScale: {x: 0.11896565, y: 0.04525171, z: 0.051450353}
   m_ConstrainProportionsScale: 1
   m_Children: []

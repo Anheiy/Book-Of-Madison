@@ -30,6 +30,7 @@ public class Shoot : MonoBehaviour
     }
     public void StartFire()
     {
+        animator.SetFloat("ShotSpeed", ((RangedWeapon)InventoryManager.items[0]).ShotSpeed);
         Vector3 mousePos = Input.mousePosition;
         Vector3 viewportPoint = new Vector3(mousePos.x / Screen.width, mousePos.y / Screen.height, 0);
         Ray ray = mainCamera.ViewportPointToRay(viewportPoint);
@@ -43,7 +44,7 @@ public class Shoot : MonoBehaviour
             Vector3 hitPoint = hit.point;
             if (hit.transform.gameObject.GetComponent<Damageable>() != null)
             {
-                hit.transform.gameObject.GetComponent<Damageable>().ReduceHealth(2);
+                hit.transform.gameObject.GetComponent<Damageable>().ReduceHealth(((RangedWeapon)InventoryManager.items[0]).DamageOnHit);
                 Debug.Log("shot fired at: " + hit.transform.gameObject.name);
             }
         }

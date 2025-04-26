@@ -2,10 +2,16 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+[Serializable]
+public struct FridgeObjects
+{
+    public List<GameObject> obj;
+}
 public class Fridge : Interactable
 {
-    public List<GameObject> objects = new List<GameObject>();
+    public List<FridgeObjects> objects = new List<FridgeObjects>();
     public GameObject fridgeSpawnPoint;
     public List<OptionPrompt> prompt;
     public override void Interact()
@@ -13,7 +19,10 @@ public class Fridge : Interactable
         this.transform.DOShakePosition(0.2f, strength: 0.5f, vibrato: 100);
         if(objects.Count != 0)
         {
-            Instantiate(objects[objects.Count - 1], fridgeSpawnPoint.transform.position, Quaternion.identity);
+            foreach (GameObject obj in objects[objects.Count - 1].obj)
+            {
+                Instantiate(obj, fridgeSpawnPoint.transform.position, Quaternion.identity);
+            }
             objects.RemoveAt(objects.Count - 1);
         }
     }

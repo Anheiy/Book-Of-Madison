@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc5343cb1e224614dbddabc9f4449258, type: 3}
-  m_Name: Apple
+  m_Name: _Sandwich
   m_EditorClassIdentifier: 
-  itemName: Apple
-  itemDescription: A apple a day keeps the doctor away! We really dont like the doctor...
+  itemName: Sandwich
+  itemDescription: Tasty!
   itemSprite: {fileID: 1489848361, guid: d5227c5479e6bcf46b4e2f26e70676c6, type: 3}
-  Prefab: {fileID: 4760072832818203884, guid: 3d485dabdc7005841999c05ff71f8a1c, type: 3}
+  Prefab: {fileID: 4760072832818203884, guid: b830399f9822ad741b277b3f6034b892, type: 3}
   HealAmount: 1
   DamageAmount: 0

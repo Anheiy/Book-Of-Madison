@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc5343cb1e224614dbddabc9f4449258, type: 3}
+  m_Name: _Apple
+  m_EditorClassIdentifier: 
+  itemName: Apple
+  itemDescription: A apple a day keeps the doctor away! We really dont like the doctor...
+  itemSprite: {fileID: 1489848361, guid: d5227c5479e6bcf46b4e2f26e70676c6, type: 3}
+  Prefab: {fileID: 4760072832818203884, guid: 3d485dabdc7005841999c05ff71f8a1c, type: 3}
+  HealAmount: 1
+  DamageAmount: 0
