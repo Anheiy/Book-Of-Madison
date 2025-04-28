@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Damageable : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class Damageable : MonoBehaviour
     public onDamaged ondamaged;
     public delegate void onHealed();
     public onDamaged onhealed;
+    //
+    public UnityEvent damaged;
+
     private void Start()
     {
         health = maxHealth;
@@ -24,6 +28,7 @@ public class Damageable : MonoBehaviour
         health = health - amount;
         damageDance = StartCoroutine(DamageDance());
         ondamaged?.Invoke();
+        damaged?.Invoke();
         if(health <= 0)
         {
             Destroy(gameObject);

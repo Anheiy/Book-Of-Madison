@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using UnityEngine.Events;
 public class EnemyAI : MonoBehaviour
 {
     private NavMeshAgent agent;
@@ -29,6 +29,8 @@ public class EnemyAI : MonoBehaviour
     float timer = 0;
     int timeOnTarget = 4;
     bool canSwitch = false;
+    //unity events
+    public UnityEvent attacking;
     private void Awake()
     {
         player = GameObject.Find("Player").transform;
@@ -107,6 +109,7 @@ public class EnemyAI : MonoBehaviour
         {
             //ATTACK CODE HERE
             player.GetComponent<Damageable>().ReduceHealth(Damage);
+            attacking?.Invoke();
             alreadyAtacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
