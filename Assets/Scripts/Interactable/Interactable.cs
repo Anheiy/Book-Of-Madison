@@ -20,6 +20,10 @@ public abstract class Interactable : MonoBehaviour
         public string text;
         public UnityEvent selectionEvent;
     }
+    public bool locked;
+    public DoorType doorType = DoorType.Normal;
+    public Item Key;
+    public string Code = "";
     public bool ignoreIntial;
     
 

@@ -6,14 +6,14 @@ using UnityEngine.UI;
 
 public class LockMinigame : MonoBehaviour
 {
-    Door door;
+    Interactable interactable;
     //
     public GameObject KeyUI;
     public GameObject Holder;
     public GameObject ObjectPrefab;
-    public void StartMinigame(Door door)
+    public void StartMinigame(Interactable interactable)
     {
-        this.door = door;
+        this.interactable = interactable;
         KeyUI.SetActive(true);
         for (int i = Holder.transform.childCount - 1; i >= 0; i--)
         {
@@ -26,9 +26,9 @@ public class LockMinigame : MonoBehaviour
 
     public void Unlock(Item key)
     {
-        if(key == door.Key)
+        if(key == interactable.Key)
         {
-            door.locked = false;
+            interactable.locked = false;
             ExitMinigame();
         }
         else

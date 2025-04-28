@@ -15,10 +15,6 @@ public class Door : Interactable
     public List<OptionPrompt> prompt;
     [Space]
     public List<OptionPrompt> lockedPrompt;
-    public bool locked;
-    public DoorType doorType = DoorType.Normal;
-    public Item Key;
-    public string Code = "";
     CodeMinigame codeMinigame;
     LockMinigame lockMinigame;
     private void Start()

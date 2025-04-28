@@ -7,7 +7,7 @@ using DG.Tweening;
 public class CodeMinigame : MonoBehaviour
 {
     private string code = "";
-    private Door door;
+    private Interactable interactable;
     GameStateManager state;
     //UI
     public GameObject CodeUI;
@@ -17,11 +17,11 @@ public class CodeMinigame : MonoBehaviour
     {
         state = GameObject.Find("GameManager").GetComponent<GameStateManager>();
     }
-    public void StartMinigame(Door door)
+    public void StartMinigame(Interactable interactable)
     {
         ChangeText("");
         codeTMP.color = Color.white;
-        this.door = door;
+        this.interactable = interactable;
         CodeUI.SetActive(true);
         state.PauseState();
         Cursor.visible = true;
@@ -29,9 +29,9 @@ public class CodeMinigame : MonoBehaviour
     public void SetCode(string key)
     {
         ChangeText(code + key);
-        if(code.Length == door.Code.Length)
+        if(code.Length == interactable.Code.Length)
         {
-            if(code == door.Code)
+            if(code == interactable.Code)
             {
                 Win();
             }
@@ -45,7 +45,7 @@ public class CodeMinigame : MonoBehaviour
     public void Win()
     {
         codeTMP.color = Color.green;
-        door.locked = false;
+        interactable.locked = false;
         codeTMP.transform.DOScale(1.2f, 0.3f).OnComplete(() => codeTMP.transform.DOScale(1f, 0.3f));
         StartCoroutine(WinTimer());
     }
