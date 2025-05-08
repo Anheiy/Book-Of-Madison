@@ -17,6 +17,12 @@ public class DialogueManager : MonoBehaviour
     private int dialogueIndex = 0;
     private Coroutine currentCoroutine;
     public bool isDialogLocked = false;
+    //
+    GameStateManager state;
+    private void Start()
+    {
+        state = GameObject.Find("GameManager").GetComponent<GameStateManager>();
+    }
     public void CollectDialogue(DialoguePacket packet)
     {
         if (this.packet == null)
@@ -26,6 +32,7 @@ public class DialogueManager : MonoBehaviour
             
             this.packet = packet;
             SwapText();
+            state.PauseState();
         }
     }
     private void Update()
@@ -80,6 +87,7 @@ public class DialogueManager : MonoBehaviour
         packet = null;
         dialogueIndex = 0;
         informationIndex = 0;
+        state.PlayState();
     }
 
     private void LoadDialogue(string dialogue)

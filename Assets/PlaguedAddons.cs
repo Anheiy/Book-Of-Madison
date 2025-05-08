@@ -7,6 +7,7 @@ public class PlaguedAddons : MonoBehaviour
 {
     Animator animator;
     NavMeshAgent agent;
+    EnemyAI ai;
     Coroutine stun;
     private void Start()
     {
@@ -27,8 +28,10 @@ public class PlaguedAddons : MonoBehaviour
 
     IEnumerator StunCoroutine()
     {
+        ai.enabled = false;
         agent.isStopped = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         agent.isStopped = false;
+        ai.enabled = true;
     }
 }

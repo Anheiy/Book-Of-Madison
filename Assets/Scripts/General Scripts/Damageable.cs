@@ -16,6 +16,7 @@ public class Damageable : MonoBehaviour
     public onDamaged onhealed;
     //
     public UnityEvent damaged;
+    public UnityEvent dying;
 
     private void Start()
     {
@@ -31,6 +32,7 @@ public class Damageable : MonoBehaviour
         damaged?.Invoke();
         if(health <= 0)
         {
+            dying?.Invoke();
             Destroy(gameObject);
         }
     }
@@ -38,6 +40,7 @@ public class Damageable : MonoBehaviour
     {
         if (health < maxHealth)
         {
+            Debug.Log($"health: {health}, amount added: {amount}");
             health = health + amount;
             onhealed?.Invoke();
         }
@@ -45,6 +48,6 @@ public class Damageable : MonoBehaviour
 
     IEnumerator DamageDance()
     {
-        yield return transform.DOShakePosition(0.2f);
+        yield return transform.DOShakePosition(0.05f);
     }
 }

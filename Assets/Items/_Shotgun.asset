@@ -16,6 +16,6 @@ MonoBehaviour:
   itemDescription: Boom
   itemSprite: {fileID: 21300000, guid: 4b668720ef82d77408587ba87a736691, type: 3}
   Prefab: {fileID: 4832311884454523210, guid: 9c4872d7441ea914195539393ce7659c, type: 3}
-  DamageOnHit: 5
+  DamageOnHit: 10
   ShotSpeed: 0.5
   projectile: {fileID: 4832311884454523210, guid: 9c4872d7441ea914195539393ce7659c, type: 3}

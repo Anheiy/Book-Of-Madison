@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2863b8409c03dba4f8d4ef78788e04f0, type: 3}
   m_Name: _HockeyStick
   m_EditorClassIdentifier: 
-  itemName: HockeyStick
+  itemName: Hockey Stick
   itemDescription: a dull weapon, seems to have fallen off the roof
   itemSprite: {fileID: -1069183471, guid: d5227c5479e6bcf46b4e2f26e70676c6, type: 3}
   Prefab: {fileID: 1847842259505922836, guid: a9cd2e6e9baae7241a47357867831218, type: 3}
   DamageOnHit: 1
-  SwingSpeed: 1.5
+  SwingSpeed: 2

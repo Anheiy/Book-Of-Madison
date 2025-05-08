@@ -55,6 +55,6 @@ public class Shoot : MonoBehaviour
     }
     public void EndScope()
     {
-        stateManager.PlayState();
+            stateManager.PlayState();
     }
 }

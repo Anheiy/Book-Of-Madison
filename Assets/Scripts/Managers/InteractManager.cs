@@ -85,7 +85,6 @@ public class InteractManager : MonoBehaviour
         }
     }
 
-
     public void Interact()
     {
         if(InteractObject == null)
@@ -94,15 +93,7 @@ public class InteractManager : MonoBehaviour
         List<Interactable.OptionPrompt> text = InteractObject.GetComponent<Interactable>().ScrollText();
         if (text.Count > currentTextIndex)
         {
-            
-            if ((currentTextIndex != 0) && InteractObject.GetComponent<Interactable>().ignoreIntial)
-            {
-                GameState.PauseState();
-            }
-            else if(!InteractObject.GetComponent<Interactable>().ignoreIntial)
-            {
-                GameState.PlayState();
-            }
+            GameState.PauseState();
             InteractText.text = text[currentTextIndex].PromptText;
             //Add Option Prompts
             for (int i = 0; i < OptionsLocation.transform.childCount; i++)
@@ -119,7 +110,7 @@ public class InteractManager : MonoBehaviour
         }
         if(text.Count <= currentTextIndex)
         {
-            
+            GameState.PlayState();
             InteractObject.GetComponent<Interactable>().Interact();
             Deselect();
         }            
@@ -151,6 +142,7 @@ public class InteractManager : MonoBehaviour
             
         });
         InteractObject = null;
+        
     }
     public void EnableUI()
     {

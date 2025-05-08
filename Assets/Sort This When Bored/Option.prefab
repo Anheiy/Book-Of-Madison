@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: <sprite=0> Examine
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 49a98716d686225499ba8cb0912074ff, type: 2}
-  m_sharedMaterial: {fileID: -9214637561144198152, guid: 49a98716d686225499ba8cb0912074ff, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d509694c5617dfb4f8d85a86c6b4dc4d, type: 2}
+  m_sharedMaterial: {fileID: -182699544302437503, guid: d509694c5617dfb4f8d85a86c6b4dc4d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
-  m_fontSizeBase: 55
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

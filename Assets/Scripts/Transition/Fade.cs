@@ -11,7 +11,7 @@ public class Fade : Transition
     public override IEnumerator FadeIn()
     {
         Debug.Log("Fade in");
-        var Tweener = fadeObj.DOFade(1f, 0.5f);
+        var Tweener = fadeObj.DOFade(1f, 0f);
         yield return Tweener.WaitForCompletion();
     }
 

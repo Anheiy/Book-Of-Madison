@@ -266,19 +266,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   InteractManager: {fileID: 0}
-  ignoreIntial: 1
+  locked: 0
+  doorType: 0
+  Key: {fileID: 0}
+  Code: 
+  ignoreIntial: 0
   item: {fileID: 11400000, guid: 415a3304cce40cc429462d8562ec9902, type: 2}
-  prompt:
-  - PromptText: It's a Hockey Stick. This will help me kill that damn bird!
-    buttons:
-    - text: Pick it up
-      selectionEvent:
-        m_PersistentCalls:
-          m_Calls: []
-    - text: Leave it
-      selectionEvent:
-        m_PersistentCalls:
-          m_Calls: []
+  prompt: []
 --- !u!114 &4696313352458646802
 MonoBehaviour:
   m_ObjectHideFlags: 0

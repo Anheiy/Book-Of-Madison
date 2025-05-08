@@ -178,7 +178,7 @@ public class InventoryManager : MonoBehaviour
             {
                 Destroy(meleeWeaponLocation.transform.GetChild(0).gameObject);
             }
-        if (items[0] is MeleeWeapon)
+        if (items[0] is MeleeWeapon || items[0] is Key)
         {
 
             if (items[0] != null)

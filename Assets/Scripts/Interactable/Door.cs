@@ -71,8 +71,8 @@ public class Door : Interactable
     {
         yield return transition.FadeIn();
         SwitchCamera();
-        yield return new WaitForSeconds(2f);
-        if(OpenEvents != null) 
+        yield return new WaitForSeconds(1f);
+        if (OpenEvents != null) 
             OpenEvents.Invoke();
         yield return transition.FadeOut();
     }

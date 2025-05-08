@@ -22,17 +22,19 @@ public class GameStateManager : MonoBehaviour
     {
         currentstate = State.paused;
         HandleState();
+        Debug.Log("Pause");
     }
     public void PlayState()
     {
         currentstate = State.play;
         HandleState();
+        Debug.Log("Play");
     }
     public void ScopeState()
     {
         currentstate = State.scope;
         HandleState();
-        
+        Debug.Log("Scope");
     }
 
     public void HandleState()

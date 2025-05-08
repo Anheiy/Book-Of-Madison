@@ -5,12 +5,17 @@ using DG.Tweening;
 
 public class Health : Damageable
 {
-    public List<GameObject> healthList = new List<GameObject>();
+    private List<GameObject> healthList = new List<GameObject>();
     void Awake()
     {
         ondamaged += ReduceHealthStats;
         onhealed += IncreaseHealthStats;
         InvokeRepeating("Cycle", 0, 5);
+        Transform heartsParent = GameObject.Find("Hearts").transform;
+        foreach (Transform child in heartsParent)
+        {
+            healthList.Add(child.gameObject);
+        }
     }
     private void OnDestroy()
     {
@@ -27,7 +32,7 @@ public class Health : Damageable
     }
     public void IncreaseHealthStats()
     {
-        for (int i = health - 1; i < maxHealth; i++)
+        for (int i = 0; i < health; i++)
         {
             healthList[i].SetActive(true);
         }

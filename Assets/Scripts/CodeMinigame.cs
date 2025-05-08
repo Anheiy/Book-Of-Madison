@@ -48,6 +48,7 @@ public class CodeMinigame : MonoBehaviour
         interactable.locked = false;
         codeTMP.transform.DOScale(1.2f, 0.3f).OnComplete(() => codeTMP.transform.DOScale(1f, 0.3f));
         StartCoroutine(WinTimer());
+        state.PlayState();
     }
     public void Lose()
     {
@@ -71,5 +72,6 @@ public class CodeMinigame : MonoBehaviour
     {
         CodeUI.SetActive(false);
         Cursor.visible = false;
+        state.PlayState();
     }
 }

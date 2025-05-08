@@ -502,7 +502,7 @@ NavMeshAgent:
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
-  avoidancePriority: 50
+  avoidancePriority: 0
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
@@ -537,6 +537,9 @@ MonoBehaviour:
   attackRange: 0.7
   playerInSightRange: 0
   playerInAttackRange: 0
+  attacking:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1031147317308177442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,6 +554,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 1
+  damaged:
+    m_PersistentCalls:
+      m_Calls: []
+  dying:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!95 &6966161856379446093
 Animator:
   serializedVersion: 5

@@ -16,5 +16,5 @@ MonoBehaviour:
   itemDescription: Tasty!
   itemSprite: {fileID: 1489848361, guid: d5227c5479e6bcf46b4e2f26e70676c6, type: 3}
   Prefab: {fileID: 4760072832818203884, guid: b830399f9822ad741b277b3f6034b892, type: 3}
-  HealAmount: 1
+  HealAmount: 3
   DamageAmount: 0

@@ -14,6 +14,7 @@ public class Consume : MonoBehaviour
     }
     public void EffectPlayer()
     {
+        Debug.Log("Consuming, Amount: " + (((Consumable)inventoryManager.GetCurrentItem()).HealAmount - ((Consumable)inventoryManager.GetCurrentItem()).DamageAmount));
         health.IncreaseHealth(((Consumable)inventoryManager.GetCurrentItem()).HealAmount);
         health.ReduceHealth(((Consumable)inventoryManager.GetCurrentItem()).DamageAmount);
         inventoryManager.DeleteCurrentItem();   
