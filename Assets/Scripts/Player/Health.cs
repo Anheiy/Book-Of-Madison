@@ -6,6 +6,7 @@ using DG.Tweening;
 public class Health : Damageable
 {
     private List<GameObject> healthList = new List<GameObject>();
+    public AudioClip playerDamageClip;
     void Awake()
     {
         ondamaged += ReduceHealthStats;
@@ -15,6 +16,7 @@ public class Health : Damageable
         foreach (Transform child in heartsParent)
         {
             healthList.Add(child.gameObject);
+            Debug.Log(child.name);
         }
     }
     private void OnDestroy()
@@ -29,12 +31,15 @@ public class Health : Damageable
         {
             healthList[i].SetActive(false);
         }
+        SFXManager.Instance.PlaySFX(playerDamageClip, 0.1f, 2);
     }
     public void IncreaseHealthStats()
     {
-        for (int i = 0; i < health; i++)
+        int count = Mathf.Min(health, healthList.Count);
+        for (int i = 0; i < count; i++)
         {
-            healthList[i].SetActive(true);
+            if (healthList[i] != null)
+                healthList[i].SetActive(true);
         }
     }
 

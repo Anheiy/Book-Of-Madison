@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Baseball Bat
   itemDescription: axe!
-  itemSprite: {fileID: -1069183471, guid: d5227c5479e6bcf46b4e2f26e70676c6, type: 3}
+  itemSprite: {fileID: 1640887265, guid: 056afc4e853930d4d9be5dfe2a0e73f2, type: 3}
   Prefab: {fileID: 1847842259505922836, guid: 35c7f32b632533b4a900951107f9b14c, type: 3}
-  DamageOnHit: 5
+  DamageOnHit: 3
   SwingSpeed: 0.75
+  attackSFX: {fileID: 8300000, guid: b97a823e33ec325409b8ca3b2a927820, type: 3}

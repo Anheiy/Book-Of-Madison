@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Shotgun
   itemDescription: Boom
-  itemSprite: {fileID: 21300000, guid: 4b668720ef82d77408587ba87a736691, type: 3}
+  itemSprite: {fileID: 928588565, guid: 056afc4e853930d4d9be5dfe2a0e73f2, type: 3}
   Prefab: {fileID: 4832311884454523210, guid: 9c4872d7441ea914195539393ce7659c, type: 3}
-  DamageOnHit: 10
+  DamageOnHit: 5
   ShotSpeed: 0.5
   projectile: {fileID: 4832311884454523210, guid: 9c4872d7441ea914195539393ce7659c, type: 3}
+  shotSFX: {fileID: 8300000, guid: 5479c2797c4214a428c1b5344db9c4cc, type: 3}

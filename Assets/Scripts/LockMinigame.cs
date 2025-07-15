@@ -11,6 +11,7 @@ public class LockMinigame : MonoBehaviour
     public GameObject KeyUI;
     public GameObject Holder;
     public GameObject ObjectPrefab;
+    public AudioClip unlockClip;
     public void StartMinigame(Interactable interactable)
     {
         this.interactable = interactable;
@@ -30,6 +31,7 @@ public class LockMinigame : MonoBehaviour
         {
             interactable.locked = false;
             ExitMinigame();
+            SFXManager.Instance.PlaySFX(unlockClip, volume: 20);
         }
         else
         {

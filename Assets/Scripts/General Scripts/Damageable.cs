@@ -9,6 +9,7 @@ public class Damageable : MonoBehaviour
 {
     public int health;
     public int maxHealth = 1;
+    public bool isInvulnerable;
     private Coroutine damageDance;
     public delegate void onDamaged();
     public onDamaged ondamaged;
@@ -17,13 +18,17 @@ public class Damageable : MonoBehaviour
     //
     public UnityEvent damaged;
     public UnityEvent dying;
+    private AudioClip destroySFX;
 
     private void Start()
     {
         health = maxHealth;
+        destroySFX = Resources.Load<AudioClip>("break");
     }
-    public void ReduceHealth(int amount)
+    public void ReduceHealth(int amount, bool breakInvulnerable = false)
     {
+        if (isInvulnerable && !breakInvulnerable)
+            return;
         if(amount == 0)
             return; 
         health = health - amount;
@@ -34,6 +39,7 @@ public class Damageable : MonoBehaviour
         {
             dying?.Invoke();
             Destroy(gameObject);
+            SFXManager.Instance.PlaySFX(destroySFX, volume: 0.1f);
         }
     }
     public void IncreaseHealth(int amount)

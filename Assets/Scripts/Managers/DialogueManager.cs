@@ -17,6 +17,7 @@ public class DialogueManager : MonoBehaviour
     private int dialogueIndex = 0;
     private Coroutine currentCoroutine;
     public bool isDialogLocked = false;
+    public AudioClip clip;
     //
     GameStateManager state;
     private void Start()
@@ -107,6 +108,7 @@ public class DialogueManager : MonoBehaviour
         {
             currentLength += characters[i];
             textbox.text = currentLength;
+            SFXManager.Instance.PlaySFX(clip, 0.4f, 1);
             yield return new WaitForSeconds(0.04f);
         }
     }

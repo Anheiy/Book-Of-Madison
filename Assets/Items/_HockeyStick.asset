@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Hockey Stick
   itemDescription: a dull weapon, seems to have fallen off the roof
-  itemSprite: {fileID: -1069183471, guid: d5227c5479e6bcf46b4e2f26e70676c6, type: 3}
+  itemSprite: {fileID: -1493605005, guid: 056afc4e853930d4d9be5dfe2a0e73f2, type: 3}
   Prefab: {fileID: 1847842259505922836, guid: a9cd2e6e9baae7241a47357867831218, type: 3}
   DamageOnHit: 1
   SwingSpeed: 2
+  attackSFX: {fileID: 8300000, guid: 6ec3266975b6bdb4db90d3a06c5883c5, type: 3}

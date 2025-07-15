@@ -14,9 +14,11 @@ public class Fridge : Interactable
     public List<FridgeObjects> objects = new List<FridgeObjects>();
     public GameObject fridgeSpawnPoint;
     public List<OptionPrompt> prompt;
+    public AudioClip shake_clip;
     public override void Interact()
     {
         this.transform.DOShakePosition(0.2f, strength: 0.5f, vibrato: 100);
+        SFXManager.Instance.PlaySFX(shake_clip, location: this.gameObject);
         if(objects.Count != 0)
         {
             foreach (GameObject obj in objects[objects.Count - 1].obj)

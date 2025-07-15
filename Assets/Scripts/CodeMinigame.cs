@@ -12,6 +12,8 @@ public class CodeMinigame : MonoBehaviour
     //UI
     public GameObject CodeUI;
     public TextMeshProUGUI codeTMP;
+    public AudioClip unlockClip;
+    public AudioClip buttonClip;
 
     private void Start()
     {
@@ -28,8 +30,10 @@ public class CodeMinigame : MonoBehaviour
     }
     public void SetCode(string key)
     {
+        if(code.ToCharArray().Length < interactable.Code.Length)
         ChangeText(code + key);
-        if(code.Length == interactable.Code.Length)
+        SFXManager.Instance.PlaySFX(buttonClip, volume: 0.1f);
+        if (code.Length == interactable.Code.Length && interactable.locked == true)
         {
             if(code == interactable.Code)
             {
@@ -49,6 +53,7 @@ public class CodeMinigame : MonoBehaviour
         codeTMP.transform.DOScale(1.2f, 0.3f).OnComplete(() => codeTMP.transform.DOScale(1f, 0.3f));
         StartCoroutine(WinTimer());
         state.PlayState();
+        SFXManager.Instance.PlaySFX(unlockClip, volume: 20);
     }
     public void Lose()
     {

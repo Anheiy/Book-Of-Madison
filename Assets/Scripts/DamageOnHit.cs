@@ -5,6 +5,8 @@ using UnityEngine;
 public class DamageOnHit : MonoBehaviour
 {
     public bool canDamage;
+    public bool destroyOnCollide = false;
+    public int destroyOnCollideDamage = 5;
     public ItemHolder itemHolder;
     public List<GameObject> thingsHit;
 
@@ -16,10 +18,27 @@ public class DamageOnHit : MonoBehaviour
     {
         Debug.Log("Hit something: " + collision.name);
         if (canDamage)
-            if (collision.gameObject.GetComponent<Damageable>() != null && !thingsHit.Contains(collision.gameObject) && collision.tag != "Player")
+        {
+            if (!destroyOnCollide)
             {
-                collision.gameObject.GetComponent<Damageable>().ReduceHealth(((MeleeWeapon)itemHolder.item).DamageOnHit);
-                thingsHit.Add(collision.gameObject);
+                if (collision.gameObject.GetComponent<Damageable>() != null && !thingsHit.Contains(collision.gameObject) && collision.tag != "Player")
+                {
+                    collision.gameObject.GetComponent<Damageable>().ReduceHealth(((MeleeWeapon)itemHolder.item).DamageOnHit);
+                    if(((MeleeWeapon)itemHolder.item).attackSFX != null)
+                    SFXManager.Instance.PlaySFX(((MeleeWeapon)itemHolder.item).attackSFX, volume: 0.1f, pitch: 0.5f);
+                    thingsHit.Add(collision.gameObject);
+                }
             }
+            else
+            {
+                if (collision.gameObject.GetComponent<Damageable>() != null && !thingsHit.Contains(collision.gameObject) && collision.tag != "Player")
+                {
+                    collision.gameObject.GetComponent<Damageable>().ReduceHealth(destroyOnCollideDamage, true);
+                    thingsHit.Add(collision.gameObject);
+                    Destroy(gameObject);
+                }
+            }
+        }
+
     }
 }

@@ -31,6 +31,7 @@ public class Shoot : MonoBehaviour
     public void StartFire()
     {
         animator.SetFloat("ShotSpeed", ((RangedWeapon)InventoryManager.items[0]).ShotSpeed);
+        SFXManager.Instance.PlaySFX(((RangedWeapon)InventoryManager.items[0]).shotSFX, 0.1f);
         Vector3 mousePos = Input.mousePosition;
         Vector3 viewportPoint = new Vector3(mousePos.x / Screen.width, mousePos.y / Screen.height, 0);
         Ray ray = mainCamera.ViewportPointToRay(viewportPoint);

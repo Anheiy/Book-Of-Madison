@@ -11,8 +11,8 @@ public class DamageableCustomEditor : Editor
         Damageable damageableScript = (Damageable)target;
         damageableScript.health = EditorGUILayout.IntField("Health", damageableScript.health);
         damageableScript.maxHealth = EditorGUILayout.IntField("Health", damageableScript.maxHealth);
-
-        if(GUILayout.Button("Deal 1 Damage"))
+        damageableScript.maxHealth = EditorGUILayout.IntField("Clip", damageableScript.maxHealth);
+        if (GUILayout.Button("Deal 1 Damage"))
         {
             damageableScript.ReduceHealth(1);
         }

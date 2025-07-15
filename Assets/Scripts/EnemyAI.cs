@@ -71,14 +71,13 @@ public class EnemyAI : MonoBehaviour
         }
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
-        if (distanceToWalkPoint.magnitude < 1f || canSwitch)
+        if (distanceToWalkPoint.magnitude < 1f && canSwitch)
         {
             
             timer = 4;
             canSwitch = false;
             walkPointSet = false;
         }
-        Debug.Log("Patrolling");
     }
 
     private void SearchWalkPoint()
@@ -97,7 +96,6 @@ public class EnemyAI : MonoBehaviour
         Vector3 direction = (player.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-        Debug.Log("Chasing");
     }
     public void AttackPlayer()
     {
@@ -113,7 +111,6 @@ public class EnemyAI : MonoBehaviour
             alreadyAtacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
-        Debug.Log("Attacking");
     }
 
     private void ResetAttack()

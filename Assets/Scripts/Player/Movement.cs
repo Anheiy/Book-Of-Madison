@@ -1,58 +1,89 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class Movement : MonoBehaviour
 {
     [Header("Movement")]
-    public float moveSpeed;
-
+    public float moveSpeed = 5f;
     public Transform orientation;
     public Transform playerBodyTransform;
-    float horizontalInput;
-    float verticalInput;
     public bool lockMovement = false;
-    Vector3 moveDirection;
-    public Animator animator;
-    Rigidbody rb;
 
-    public void Start()
+    [Header("Animation & Sound")]
+    public Animator animator;
+    public AudioClip[] walkClips;
+
+    private Rigidbody rb;
+    private Vector3 moveDirection;
+    private float horizontalInput;
+    private float verticalInput;
+    private bool isMoving = false;
+    private bool wasMoving = false;
+
+    private Coroutine footstepCoroutine;
+
+    void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
     }
-    private void Update()
+
+    void Update()
     {
         GetInput();
+        HandleAnimation();
+        HandleFootsteps();
     }
-    private void FixedUpdate()
+
+    void FixedUpdate()
     {
         MovePlayer();
     }
 
-    
-    public void GetInput()
+    private void GetInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+        isMoving = horizontalInput != 0 || verticalInput != 0;
+    }
 
-        if (horizontalInput != 0 || verticalInput != 0)
+    private void HandleAnimation()
+    {
+        if (isMoving != wasMoving)
         {
-            animator.SetBool("isMoving", true);
-        }
-        else
-        {
-            animator.SetBool("isMoving", false);
+            animator.SetBool("isMoving", isMoving);
+            wasMoving = isMoving;
         }
     }
 
-    public void MovePlayer()
+    private void HandleFootsteps()
+    {
+        if (isMoving && footstepCoroutine == null)
+        {
+            footstepCoroutine = StartCoroutine(FootstepSound());
+        }
+        else if (!isMoving && footstepCoroutine != null)
+        {
+            StopCoroutine(footstepCoroutine);
+            footstepCoroutine = null;
+        }
+    }
+
+    private IEnumerator FootstepSound()
+    {
+        while (true)
+        {
+            SFXManager.Instance.PlayRandomSFX(walkClips, volume: 20f);
+            yield return new WaitForSeconds(0.45f);
+        }
+    }
+
+    private void MovePlayer()
     {
         if (!lockMovement)
         {
-            //need to decide movement
             moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10, ForceMode.Force);
+            rb.velocity = moveDirection.normalized * moveSpeed + new Vector3(0, rb.velocity.y, 0);
         }
     }
 }

@@ -9,10 +9,13 @@ public class PlaguedAddons : MonoBehaviour
     NavMeshAgent agent;
     EnemyAI ai;
     Coroutine stun;
+
+    public AudioClip groanSFX;
     private void Start()
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        HandleSFX();
     }
     public void Attacking()
     {
@@ -24,6 +27,11 @@ public class PlaguedAddons : MonoBehaviour
         if (stun != null)
             StopCoroutine(stun);
         stun = StartCoroutine(StunCoroutine());
+    }
+    public void HandleSFX()
+    {
+        SFXManager.Instance.PlaySFX(groanSFX, location: gameObject);
+        Invoke(nameof(HandleSFX), Random.Range(4, 12)); 
     }
 
     IEnumerator StunCoroutine()

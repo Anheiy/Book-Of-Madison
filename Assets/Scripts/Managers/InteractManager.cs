@@ -87,9 +87,9 @@ public class InteractManager : MonoBehaviour
 
     public void Interact()
     {
-        if(InteractObject == null)
-            return ;
-        
+        if (InteractObject == null)
+            return;
+
         List<Interactable.OptionPrompt> text = InteractObject.GetComponent<Interactable>().ScrollText();
         if (text.Count > currentTextIndex)
         {
@@ -103,21 +103,21 @@ public class InteractManager : MonoBehaviour
             for (int i = 0; i < text[currentTextIndex].buttons.Length; i++)
             {
                 GameObject button = Instantiate(OptionPrompt, OptionsLocation.transform);
-                button.GetComponent<TextMeshProUGUI>().text = "<sprite=" + (i + 2) +"> " +text[currentTextIndex].buttons[i].text;
+                button.GetComponent<TextMeshProUGUI>().text = "<sprite=" + (i + 2) + "> " + text[currentTextIndex].buttons[i].text;
             }
-            
+
 
         }
-        if(text.Count <= currentTextIndex)
+        if (text.Count <= currentTextIndex)
         {
             GameState.PlayState();
             InteractObject.GetComponent<Interactable>().Interact();
             Deselect();
-        }            
+        }
         if (currentTextIndex - 1 != -1 && text[currentTextIndex - 1].buttons[0].selectionEvent != null)
-            {
-                text[currentTextIndex - 1].buttons[0].selectionEvent.Invoke();
-            }
+        {
+            text[currentTextIndex - 1].buttons[0].selectionEvent.Invoke();
+        }
         currentTextIndex++;
     }
     public void Deselect()

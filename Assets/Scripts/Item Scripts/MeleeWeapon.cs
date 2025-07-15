@@ -5,4 +5,5 @@ using UnityEngine;
 public class MeleeWeapon : Weapon
 {
     public float SwingSpeed = 0.3f;
+    public AudioClip attackSFX;
 }

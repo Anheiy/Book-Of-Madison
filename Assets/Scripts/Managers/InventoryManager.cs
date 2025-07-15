@@ -12,6 +12,7 @@ public class InventoryManager : MonoBehaviour
     public Image[] imageSlots;
     public GameObject meleeWeaponLocation;
     public GameObject rangedWeaponLocation;
+    public Sprite empty_sprite;
     public bool isScrollLocked = false;
 
     private GameObject Body;
@@ -19,8 +20,11 @@ public class InventoryManager : MonoBehaviour
     private GameStateManager gameStateManager;
 
     public TextMeshProUGUI item_name;
-    
-    
+
+    public AudioClip dropClip;
+    public AudioClip pickupClip;
+
+
     private void Start()
     {
         Body = GameObject.Find("PlayerBody");
@@ -94,6 +98,7 @@ public class InventoryManager : MonoBehaviour
     }
     public void AddItem(Item item, GameObject reference)
     {
+        SFXManager.Instance.PlaySFX(pickupClip, 0.1f, 2);
         bool canAdd = false;
         int slot = 0;
 
@@ -133,7 +138,7 @@ public class InventoryManager : MonoBehaviour
             }
             else
             {
-                imageSlots[i].sprite = null;
+                imageSlots[i].sprite = empty_sprite;
             }
         }
         if(items[0] != null)
@@ -261,6 +266,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (items[0] != null)
         {
+            SFXManager.Instance.PlaySFX(dropClip, 0.1f, 2);
             GameObject Object = Instantiate(items[0].Prefab);
             Object.transform.position = meleeWeaponLocation.transform.position;
             items[0] = null;

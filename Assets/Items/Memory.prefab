@@ -121,8 +121,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   InteractManager: {fileID: 0}
+  locked: 0
+  doorType: 0
+  Key: {fileID: 11400000, guid: 0f88836677841f94f886e7504eb63dcf, type: 2}
+  Code: 
   ignoreIntial: 0
-  item: {fileID: 11400000, guid: 4a147fb19c8845e48afefc8ff6c76a63, type: 2}
+  item: {fileID: 0}
   prompt: []
 --- !u!54 &4095546923620144850
 Rigidbody:

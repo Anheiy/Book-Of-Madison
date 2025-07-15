@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: 0
   itemDescription: Placeholder Text
-  itemSprite: {fileID: 0}
+  itemSprite: {fileID: -122484293, guid: 056afc4e853930d4d9be5dfe2a0e73f2, type: 3}
   Prefab: {fileID: 1847842259505922836, guid: 96f6ef77e854fa2418e0fa3f3ab2ee5c, type: 3}

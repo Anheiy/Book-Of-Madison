@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2863b8409c03dba4f8d4ef78788e04f0, type: 3}
+  m_Script: {fileID: 11500000, guid: f72f9f63cfce50f449c6cbb8d161a19a, type: 3}
   m_Name: _Memory
   m_EditorClassIdentifier: 
-  itemName: Memory
-  itemDescription: where did my book go?
-  itemSprite: {fileID: -1985795288, guid: 0ce2cc6652dcd0648867def6d9031e63, type: 3}
+  itemName: Book Memory
+  itemDescription: Placeholder Text
+  itemSprite: {fileID: 184049644, guid: 056afc4e853930d4d9be5dfe2a0e73f2, type: 3}
   Prefab: {fileID: 4760072832818203884, guid: 1f1e3371c61621c49bfd34c86e4ed280, type: 3}
-  DamageOnHit: 1
-  SwingSpeed: 1
