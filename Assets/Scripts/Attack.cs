@@ -12,7 +12,7 @@ public class Attack : MonoBehaviour
     }
     public void StartSwing()
     {
-        SFXManager.Instance.PlaySFX(swingclip, 0.1f);
+        SFXManager.Instance.PlaySFX(swingclip, 0.3f);
         animator.SetFloat("SwingSpeed", ((MeleeWeapon)InventoryManager.items[0]).SwingSpeed);
         GameObject.Find("MeleeLocation").transform.GetChild(0).GetComponent<DamageOnHit>().canDamage = true;
     }

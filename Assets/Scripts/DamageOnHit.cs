@@ -6,9 +6,13 @@ public class DamageOnHit : MonoBehaviour
 {
     public bool canDamage;
     public bool destroyOnCollide = false;
+    public bool killPlayer = false;
+    public GameObject Player;
     public int destroyOnCollideDamage = 5;
+    const int KILLFLOORDAMAGE = 5;
     public ItemHolder itemHolder;
     public List<GameObject> thingsHit;
+    
 
     private void Start()
     {
@@ -16,7 +20,10 @@ public class DamageOnHit : MonoBehaviour
     }
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("Hit something: " + collision.name);
+        if(killPlayer & collision.tag == "Player")
+        {
+            Player.GetComponent<Damageable>().ReduceHealth(KILLFLOORDAMAGE, true);
+        }
         if (canDamage)
         {
             if (!destroyOnCollide)
@@ -25,13 +32,13 @@ public class DamageOnHit : MonoBehaviour
                 {
                     collision.gameObject.GetComponent<Damageable>().ReduceHealth(((MeleeWeapon)itemHolder.item).DamageOnHit);
                     if(((MeleeWeapon)itemHolder.item).attackSFX != null)
-                    SFXManager.Instance.PlaySFX(((MeleeWeapon)itemHolder.item).attackSFX, volume: 0.1f, pitch: 0.5f);
+                    SFXManager.Instance.PlaySFX(((MeleeWeapon)itemHolder.item).attackSFX, volume: 0.3f, pitch: 0.5f);
                     thingsHit.Add(collision.gameObject);
                 }
             }
             else
             {
-                if (collision.gameObject.GetComponent<Damageable>() != null && !thingsHit.Contains(collision.gameObject) && collision.tag != "Player")
+                if (collision.gameObject.GetComponent<Damageable>() != null && !thingsHit.Contains(collision.gameObject) && collision.tag == "Phil")
                 {
                     collision.gameObject.GetComponent<Damageable>().ReduceHealth(destroyOnCollideDamage, true);
                     thingsHit.Add(collision.gameObject);

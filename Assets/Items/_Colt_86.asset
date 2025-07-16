@@ -17,6 +17,6 @@ MonoBehaviour:
   itemSprite: {fileID: 531933981, guid: 056afc4e853930d4d9be5dfe2a0e73f2, type: 3}
   Prefab: {fileID: 4832311884454523210, guid: 42dc1420265004148bfc3ffa6768a339, type: 3}
   DamageOnHit: 2
-  ShotSpeed: 0.5
+  ShotSpeed: 0.75
   projectile: {fileID: 4832311884454523210, guid: 42dc1420265004148bfc3ffa6768a339, type: 3}
   shotSFX: {fileID: 8300000, guid: 2da856ea207773e469ceaf39bc9d2402, type: 3}

@@ -904,8 +904,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 232379cbb1294c945a18a04808872d19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 6
-  maxHealth: 6
+  health: 3
+  maxHealth: 3
   isInvulnerable: 0
   damaged:
     m_PersistentCalls:

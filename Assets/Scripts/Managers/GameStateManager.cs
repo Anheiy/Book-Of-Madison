@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameStateManager : MonoBehaviour
 {
@@ -11,6 +12,15 @@ public class GameStateManager : MonoBehaviour
     DialogueManager dialogueManager;
     InteractManager interactManager;
 
+    public GameObject DeathUI;
+    public GameObject WinUI;
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            CloseApplication();
+        }
+    }
     private void Start()
     {
         movement = GameObject.Find("Player").GetComponent<Movement>();
@@ -58,5 +68,25 @@ public class GameStateManager : MonoBehaviour
     public string GetState()
     {
         return currentstate.ToString();
+    }
+    public void Death()
+    {
+        Cursor.visible = true;
+        DeathUI.SetActive(true);
+    }
+
+    public void Win()
+    {
+        Cursor.visible = true;
+        WinUI.SetActive(true);
+    }
+    public void CloseApplication()
+    {
+        Application.Quit();
+    }
+
+    public void Reload()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

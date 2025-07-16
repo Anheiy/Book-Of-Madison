@@ -66,8 +66,13 @@ public class EnemyAI : MonoBehaviour
         {
             agent.SetDestination(walkPoint);
             Vector3 direction = (walkPoint - transform.position).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+            Vector3 flatDirection = new Vector3(direction.x, 0, direction.z);
+
+            if (flatDirection != Vector3.zero)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(flatDirection);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+            }
         }
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;

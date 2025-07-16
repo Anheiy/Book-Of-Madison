@@ -27,10 +27,15 @@ public class Health : Damageable
 
     public void ReduceHealthStats()
     {
-        for (int i = health; i < maxHealth; i++)
+        int clampedStart = Mathf.Clamp(health, 0, healthList.Count);
+        int clampedEnd = Mathf.Min(maxHealth, healthList.Count);
+
+        for (int i = clampedStart; i < clampedEnd; i++)
         {
-            healthList[i].SetActive(false);
+            if (healthList[i] != null)
+                healthList[i].SetActive(false);
         }
+
         SFXManager.Instance.PlaySFX(playerDamageClip, 0.1f, 2);
     }
     public void IncreaseHealthStats()
