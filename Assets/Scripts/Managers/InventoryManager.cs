@@ -27,6 +27,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
+        items = new Item[3];
         Body = GameObject.Find("PlayerBody");
         animator = Body.GetComponent<Animator>();
         gameStateManager = GetComponent<GameStateManager>();   

@@ -10,14 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4949545e23886d3489b4bcb220056751, type: 3}
-  m_Name: Missing Book
+  m_Name: Babel
   m_EditorClassIdentifier: 
   currentName:
   - Madi
   information:
   - dialogue:
-    - I could've sworn I put it here...
-    - My book! it's gone!
-    - What's going on? I never misplace my books, I cant even recall which one it
-      was!
-    - I need to find it, maybe I left it on campus?
+    - Babel...

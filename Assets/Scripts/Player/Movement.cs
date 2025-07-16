@@ -73,7 +73,7 @@ public class Movement : MonoBehaviour
     {
         while (true)
         {
-            SFXManager.Instance.PlayRandomSFX(walkClips, volume: 20f);
+            SFXManager.Instance.PlayRandomSFX(walkClips, volume: 50f);
             yield return new WaitForSeconds(0.45f);
         }
     }
