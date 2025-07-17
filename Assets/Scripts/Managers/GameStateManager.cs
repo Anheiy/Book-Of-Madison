@@ -18,7 +18,7 @@ public class GameStateManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            CloseApplication();
+            //SceneManager.LoadScene("MainMenu");
         }
     }
     private void Start()
